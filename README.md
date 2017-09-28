@@ -17,7 +17,7 @@ stdin/stdout.
 
 ```
 $ mkchoice -h
-Usage: mkchoice [-h|--help] [-p <prompt>|--prompt <prompt>] [args] [-- <args>]
+Usage: mkchoice [-h|--help] [-v|--vanish] [-p <prompt>|--prompt <prompt>] [args] [-- <args>]
 
   mkchoice prompts the user's tty to choose one of the given options, and
   outputs the chosen option. Pass - as one of the args to also read
@@ -26,6 +26,10 @@ Usage: mkchoice [-h|--help] [-p <prompt>|--prompt <prompt>] [args] [-- <args>]
 
   Change the selected option with up/down or j/k, and confirm your
   selection with space or enter.
+
+  If the --vanish flag is given, the prompt will be erased from the
+  terminal before the output is shown. Otherwise, the final state of the
+  prompt will still be visible on the screen.
 
   Example:
 
@@ -43,4 +47,5 @@ Usage: mkchoice [-h|--help] [-p <prompt>|--prompt <prompt>] [args] [-- <args>]
     z
   $ cat some-file
   b
+
 ```

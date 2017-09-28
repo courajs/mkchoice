@@ -7,9 +7,9 @@ const {promisify} = require('util');
 const timeout = promisify(setTimeout);
 const ansi = require('ansi');
 
-const parseArgs = require('./parse-args');
-const helpText = require('./help');
-const collectLines = require('./collect-lines');
+const parseArgs = require('../lib/parse-args');
+const helpText = require('../lib/help');
+const collectLines = require('../lib/collect-lines');
 
 
 go();
@@ -136,9 +136,24 @@ async function go() {
         render(state);
         break;
       case space(d) || enter(d):
+        if (args.shouldVanish) {
+          vanish(state);
+        }
         console.log(state.choices[state.selected]);
         process.exit();
         break;
     }
+  }
+
+  // like it never even happened
+  function vanish(state) {
+    // erase all the options we printed
+    for (var i = 0; i < state.choices.length; i++) {
+      cursor.up();
+      cursor.eraseLine(2);
+    }
+    // also erase the prompt
+    cursor.up();
+    cursor.eraseLine(2);
   }
 }

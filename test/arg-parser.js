@@ -32,6 +32,16 @@ describe("The argument parser", function() {
     assert.deepEqual(parseArgs(['-p', 'hey']), parseArgs(['--prompt', 'hey']), "The short & long flags are treated equivalently");
   });
 
+  it("interprets the vanish flag", function() {
+    let r = parseArgs(['a']);
+    assert.equal(r.shouldVanish, false, 'Vanish is off by default');
+
+    r = parseArgs(['a', '-v']);
+    assert.equal(r.shouldVanish, true, 'The flag enables it');
+
+    assert.deepEqual(r, parseArgs(['a', '--vanish']), 'The long and short flags are treated the same');
+  });
+
   it("Returns whether - should be substituted with stdin", function() {
     let r = parseArgs(['a', '-']);
     assert.equal(r.shouldSubstituteStdin, true, "- before -- should substitute");
