@@ -6,7 +6,8 @@ module.exports = function(stream) {
     stream.on('end', function() {
       let data = Buffer.concat(chunks).toString();
       let lines = data.split('\n')
-        .map((line) => line.trim());
+        .map((line) => line.trim())
+        .filter(x=>x);
       resolve(lines);
     });
   });
