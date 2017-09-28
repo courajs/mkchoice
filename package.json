@@ -1,6 +1,6 @@
 {
   "name": "mkchoice",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A simple command-line chooser",
   "bin": "bin/mkchoice.js",
   "scripts": {
