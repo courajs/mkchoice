@@ -102,7 +102,8 @@ async function go() {
     up: buf('1b5b41'),
     down: buf('1b5b42'),
     space: buf('20'),
-    enter: buf('0d')
+    enter: buf('0d'),
+    esc: buf('1b')
   };
 
   function sigint(dat) { return dat.equals(bufs.sigint); }
@@ -113,6 +114,7 @@ async function go() {
   function down(dat) { return dat.equals(bufs.down); }
   function space(dat) { return dat.equals(bufs.space); }
   function enter(dat) { return dat.equals(bufs.enter); }
+  function esc(dat) { return dat.equals(bufs.esc); }
 
 
   let state = new State(args.choices, findInitialSelection(args));
@@ -121,7 +123,7 @@ async function go() {
   readStream.on('data', handleInput);
   function handleInput(d) {
     switch (true) {
-      case sigint(d):
+      case sigint(d) || esc(d):
         process.exit(1);
         break;
       case eof(d):
