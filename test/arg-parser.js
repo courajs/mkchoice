@@ -49,4 +49,10 @@ describe("The argument parser", function() {
     r = parseArgs(['a', '--', '-']);
     assert.equal(r.shouldSubstituteStdin, false, "- after -- should not substitute");
   });
+
+  it("Uses stdin if no options were passed", function() {
+    let r = parseArgs(['-v']);
+    assert.equal(r.shouldSubstituteStdin, true);
+    assert.deepEqual(r.choices, ['-']);
+  });
 });

@@ -22,7 +22,8 @@ Usage: mkchoice [-h|--help] [-v|--vanish] [-p <prompt>|--prompt <prompt>] [args]
   mkchoice prompts the user's tty to choose one of the given options, and
   outputs the chosen option. Pass - as one of the args to also read
   line-separated options from stdin. Arguments after -- are taken as
-  literal options, not interpreted as flags.
+  literal options, not interpreted as flags. If you pass no arguments,
+  mkchoice will read from stdin by default.
 
   Change the selected option with up/down or j/k, and confirm your
   selection with space or enter.
@@ -47,5 +48,4 @@ Usage: mkchoice [-h|--help] [-v|--vanish] [-p <prompt>|--prompt <prompt>] [args]
     z
   $ cat some-file
   b
-
 ```
