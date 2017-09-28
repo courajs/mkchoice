@@ -7,11 +7,19 @@ const {promisify} = require('util');
 const timeout = promisify(setTimeout);
 const ansi = require('ansi');
 
-if (!process.stdin.isTTY) {
-  console.error('mkchoice can only be run directly from a terminal');
-  process.exit(1);
+
+try {
+  var fd = fs.openSync('/dev/tty', 'r+');
+} catch (e) {
+  if (e.code === 'ENXIO') {
+    console.error('mkchoice can only be run in a terminal context');
+    process.exit(1);
+  }
 }
 
+let writeStream = new tty.WriteStream(fd);
+let cursor = ansi(writeStream);
+let readStream = new tty.ReadStream(fd);
 
 let choices;
 let prompt = "Choose one:";
@@ -41,13 +49,6 @@ class State {
   }
 }
 
-let {stdout} = child_process.spawnSync('tty', {stdio: [0, 'pipe', 'pipe']});
-let mytty = stdout.toString().trim();
-let fd = fs.openSync(mytty, 'w');
-
-let writeStream = new tty.WriteStream(fd);
-
-let cursor = ansi(writeStream);
 
 let hasRendered = false;
 function render(state) {
@@ -101,8 +102,8 @@ function enter(dat) { return dat.equals(bufs.enter); }
 
 let state = new State(choices);
 render(state);
-process.stdin.setRawMode(true);
-process.stdin.on('data', handleInput);
+readStream.setRawMode(true);
+readStream.on('data', handleInput);
 function handleInput(d) {
   switch (true) {
     case sigint(d):
