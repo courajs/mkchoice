@@ -7,6 +7,9 @@ const {promisify} = require('util');
 const timeout = promisify(setTimeout);
 const ansi = require('ansi');
 
+const parseArgs = require('./parse-args');
+const helpText = require('./help');
+
 
 try {
   var fd = fs.openSync('/dev/tty', 'r+');
@@ -15,6 +18,12 @@ try {
     console.error('mkchoice can only be run in a terminal context');
     process.exit(1);
   }
+}
+
+let args = parseArgs(process.argv.slice(2));
+if (args.shouldHelp) {
+  console.log(helpText);
+  process.exit();
 }
 
 let writeStream = new tty.WriteStream(fd);
@@ -79,6 +88,11 @@ function buf(str) {
   return Buffer.from(str, 'hex');
 }
 
+
+
+/*
+ * To find these buffer values, use find-raw-input-values.js
+ */
 const bufs = {
   sigint: buf('03'),
   eof: buf('04'),
