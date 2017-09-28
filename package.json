@@ -5,7 +5,7 @@
   "main": "index.js",
   "bin": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,8 @@
   "homepage": "https://github.com/courajs/mkchoice#readme",
   "dependencies": {
     "ansi": "^0.3.1"
+  },
+  "devDependencies": {
+    "mocha": "^3.5.3"
   }
 }
