@@ -1,5 +1,5 @@
 const assert = require('assert');
-const parseArgs = require('../parse-args');
+const parseArgs = require('../lib/parse-args');
 
 describe("The argument parser", function() {
   it("returns simple options", function() {

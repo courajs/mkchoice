@@ -1,6 +1,6 @@
 const assert = require('assert');
 const stream = require('stream');
-const collect = require('../collect-lines');
+const collect = require('../lib/collect-lines');
 
 describe("The stream lines collector", function() {
   it("resolves to an array of lines", async function() {
