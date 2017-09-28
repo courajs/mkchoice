@@ -3,14 +3,7 @@
 `mkchoice` is a tool for prompting a choice from a user, which is
 compatible with shell pipelines:
 
-```sh
-$ ls -a | mkchoice -p "Which file should I delete?" | xargs rm
-Which file should I delete?
-> .DS_Store
-  README.md
-  index.js
-  package.json
-```
+![Example usage of switching git branches](img/mkchoice.gif)
 
 It does this by writing the prompt to the user's tty, instead of using
 stdin/stdout.
