@@ -8,6 +8,16 @@ compatible with shell pipelines:
 It does this by writing the prompt to the user's tty, instead of using
 stdin/stdout.
 
+## Installation
+Install with yarn or npm:
+```sh
+$ yarn global add mkchoice
+```
+```sh
+$ npm install --global mkchoice
+```
+
+## Docs
 ```
 $ mkchoice -h
 Usage: mkchoice [-h|--help] [-v|--vanish]
