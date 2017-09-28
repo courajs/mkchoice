@@ -1,0 +1,30 @@
+{
+  "name": "mkchoice",
+  "version": "1.0.0",
+  "description": "A simple command-line chooser",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/courajs/mkchoice.git"
+  },
+  "keywords": [
+    "cli",
+    "bash",
+    "scripting",
+    "sh",
+    "shell"
+  ],
+  "author": "Aaron Sikes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/courajs/mkchoice/issues"
+  },
+  "homepage": "https://github.com/courajs/mkchoice#readme",
+  "dependencies": {
+    "ansi": "^0.3.1"
+  }
+}
