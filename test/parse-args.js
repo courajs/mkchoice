@@ -55,4 +55,11 @@ describe("The argument parser", function() {
     assert.equal(r.shouldSubstituteStdin, true);
     assert.deepEqual(r.choices, ['-']);
   });
+
+  it("parses a passed selection", function() {
+    let r = parseArgs(['a', 'b', '-s', 'master']);
+    assert.equal(r.selection, 'master');
+    r = parseArgs(['a', 'b', '--selection', '4']);
+    assert.equal(r.selection, '4');
+  });
 });

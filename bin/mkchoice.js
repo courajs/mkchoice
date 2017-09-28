@@ -10,6 +10,7 @@ const ansi = require('ansi');
 const parseArgs = require('../lib/parse-args');
 const helpText = require('../lib/help');
 const collectLines = require('../lib/collect-lines');
+const findInitialSelection = require('../lib/find-initial-selection');
 
 
 go();
@@ -36,7 +37,6 @@ async function go() {
     args.choices.splice(index, 1, ...lines);
   }
 
-  let {prompt, choices} = args;
 
   let writeStream = new tty.WriteStream(fd);
   let cursor = ansi(writeStream);
@@ -66,7 +66,7 @@ async function go() {
       cursor.up(state.choices.length + 1);
     }
     hasRendered = true;
-    cursor.write(prompt);
+    cursor.write(args.prompt);
     cursor.write('\n');
     for (let i in state.choices) {
       if (i == state.selected) {
@@ -115,7 +115,7 @@ async function go() {
   function enter(dat) { return dat.equals(bufs.enter); }
 
 
-  let state = new State(choices);
+  let state = new State(args.choices, findInitialSelection(args));
   render(state);
   readStream.setRawMode(true);
   readStream.on('data', handleInput);
