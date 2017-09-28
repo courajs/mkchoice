@@ -31,4 +31,12 @@ describe("The argument parser", function() {
     assert.deepEqual(r.choices, ['a', 'b'], "It doesn't include the prompt flag in the choices");
     assert.deepEqual(parseArgs(['-p', 'hey']), parseArgs(['--prompt', 'hey']), "The short & long flags are treated equivalently");
   });
+
+  it("Returns whether - should be substituted with stdin", function() {
+    let r = parseArgs(['a', '-']);
+    assert.equal(r.shouldSubstituteStdin, true, "- before -- should substitute");
+
+    r = parseArgs(['a', '--', '-']);
+    assert.equal(r.shouldSubstituteStdin, false, "- after -- should not substitute");
+  });
 });

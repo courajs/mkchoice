@@ -26,6 +26,7 @@ module.exports = function(args) {
 
   return {
     prompt,
-    choices: processedArgs.concat(literalArgs)
+    choices: processedArgs.concat(literalArgs),
+    shouldSubstituteStdin: processedArgs.includes('-')
   };
 }
